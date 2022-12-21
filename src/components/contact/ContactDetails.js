@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useRef, useLayoutEffect} from 'react'
+import { gsap } from 'gsap'
 import {
     Flex,
     Heading,
@@ -34,27 +35,34 @@ const Feature = ({ icon, title, desc}) => {
 
 
 const ContactDetails = () => {
+
+const aboutRef = useRef();
+
+    useLayoutEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.fromTo(aboutRef.current.children, {y:50, opacity: 0}, {scrollTrigger:{trigger: aboutRef.current.children, start: 'top 80%'}, y:0, opacity: 1, duration: .5})
+        }, )
+
+    }, [])
+
   return (
-    <Flex direction='column' align='center' justify='center' mt='5rem' gap='3rem'>
-        <Heading align='center'>Contact Details</Heading>
-        <Flex direction={['column', 'row']} gap='20'>
+    <Flex direction='column' align='center' justify='center' mt='5rem' gap='3rem' ref={aboutRef}>
+        <Heading align='center'>Szczegółowe dane kontaktowe</Heading>
+        <Flex direction={['column', 'row']} gap='20' align='center'>
             <Feature 
                 icon={icons.map}
-                title='Physical Address'
-                desc='3481 Melrose Place
-                Beverly Hills, CA 90210'
+                title='Adres Fizyczny'
+                desc={'ul. Podchorążych 2 30-084 Kraków'}
             />
             <Feature 
                 icon={icons.mail}
-                title='Physical Address'
-                desc='3481 Melrose Place
-                Beverly Hills, CA 90210'
+                title='Adres Mailowy'
+                desc='kontakt@projektjks.pl'
             />
             <Feature 
                 icon={icons.phone}
-                title='Physical Address'
-                desc='3481 Melrose Place
-                Beverly Hills, CA 90210'
+                title='Numer kontaktowy'
+                desc='+48 882 231 543'
             />
         </Flex>
     </Flex>

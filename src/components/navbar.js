@@ -54,10 +54,10 @@ const MenuItems = ({ isOpen }) => {
         direction={['column', 'column', 'row', 'row']}
         pt={[4, 4, 0, 0]}
       >
-        <MenuItem key='home' to='/' name='Główna'/>
-        <MenuItem key='about' to='/about' name='O nas'/>
-        <MenuItem key='features' to={`/blog/`} name='Blog'/>
-        <MenuItem key='contact' to='/contact' name='Kontakt'/>
+        <MenuItem  to='/' name='Główna'/>
+        <MenuItem  to='/about' name='O nas'/>
+        <MenuItem  to={`/blog/`} name='Blog'/>
+        <MenuItem  to='/contact' name='Kontakt'/>
         
       </Stack>
     </Box>
@@ -91,7 +91,7 @@ const Navbar = () => {
     <NavbarContainer>
       <Box>
         <AniLink fade duration='0.3' to='/'>
-        <Text fontFamily='logo' fontSize='3xl'>projektJKS</Text>
+        <Text fontFamily='logo' fontSize='3xl'>PROJEKT JKS</Text>
         {/* <Image src={logo} w='200px'/> */}
         </AniLink>
       </Box>

@@ -84,8 +84,6 @@ const Index = () => {
         
     ))
 
-    console.log(data.allWpPost.edges)
-
   return (
     <Layout>
         <Seo 

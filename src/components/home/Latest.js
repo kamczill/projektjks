@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useLayoutEffect} from 'react'
 import { useStaticQuery, graphql, Link } from 'gatsby'
 import { 
     VStack,
@@ -11,14 +11,26 @@ import {
     Avatar,
 
 } from '@chakra-ui/react'
+import '../../pages/blog/blog.css'
+import { gsap } from 'gsap'
 import AniLink from 'gatsby-plugin-transition-link/AniLink'
 
 import photo from '../../images/team.png'
 
 const Article = ({img, title, date, desc, author, avatar, to}) => {
+    const ArticlesRef = useRef();
+
+    useLayoutEffect(() => {
+
+        const ctx = gsap.context(() => {
+            gsap.fromTo(ArticlesRef.current.children, {y:50, opacity: 0}, {scrollTrigger:{trigger: ArticlesRef.current.children, start: 'top 80%'}, y:0, opacity: 1, duration: 1.8})
+        }, )
+
+    }, [])
+
     return (
         
-            <Flex gap='5' align='flex-start' justify='flex-start' direction={['column', 'column', 'row']} h={['none','none','auto']}>
+            <Flex gap='5' align='flex-start' justify='flex-start' direction={['column', 'column', 'row']} h={['none','none','auto']} ref={ArticlesRef}>
                 <Box >
                     <Image src={img} boxSize='280px' objectFit='cover'
                         css='box-shadow: -17px -21px 0px 0px rgba(0,230,202,1);
@@ -30,7 +42,7 @@ const Article = ({img, title, date, desc, author, avatar, to}) => {
                     <Box bg='pink' px='2' py='1.5' alignItem='flex-start'>
                         <Text fontSize='xs' color='white' fontFamily='paragraph'>SEO</Text>
                         </Box>
-                    <Heading fontSize='xl' fontFamily='head'>
+                    <Heading fontSize='xl' fontFamily='head' align='left'>
                         <AniLink fade to={`/blog${to}`}>{title}</AniLink>
                     </Heading>
                     <Text align='left' color='#7B7485' fontFamily='paragraph'>Dodany: {date}</Text>
@@ -79,7 +91,6 @@ const Latest = () => {
 
     const posts = data.allWpPost.nodes;
 
-    console.log(posts)
 
   return (
     <Flex direction='column' mt='150'>
@@ -95,7 +106,7 @@ const Latest = () => {
                 desc={post.excerpt}
                 avatar={post.author.node.avatar.url}
                 author={post.author.node.name}
-
+                key={post.uri}
             />
             ))}
         </Flex>

@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Header from '../components/contact/Header'
 import ContactForm from '../components/contact/ContactForm'
 import ContactDetails from '../components/contact/ContactDetails'
