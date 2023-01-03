@@ -100,7 +100,7 @@ const Latest = () => {
             {posts.map(post => (
                 <Article 
                 to={post.uri}
-                img={post.featuredImage || photo}
+                img={post?.featuredImage || photo}
                 title={post.title}
                 date={post.date}
                 desc={post.excerpt}
